@@ -1,0 +1,47 @@
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <script>
+            function stampa4() {
+                var print = document.getElementById("demo1").value
+                var print2 = document.getElementById("demo2").value
+                var print3 = document.getElementById("demo3").value
+                var print4 = document.getElementById("demo4").value
+
+                document.getElementById("dest1").innerHTML = print
+                document.getElementById("dest2").innerHTML = print2
+                document.getElementById("dest3").innerHTML = print3
+                document.getElementById("dest4").innerHTML = print4
+            }
+        </script>
+    </head>
+
+    <body style="background-color:#dbd8e3;">
+        c
+        <form>
+            < <h1><label for="Fname"> First name</label><br></h1>
+                <br>
+                <input type="text" id="demo1">
+                <br>
+                <h1><label for="Lname"> Last name</label><br></h1>
+                <br>
+                <input type="text" id="demo2">
+                <br>
+                <h1 style="color:#002f3b;"><label for="password">password</label><br></h1>
+                <br>
+                <input type="text" id="demo3">
+                <br>
+                <h1 style="color:#fdb44b;"><label for="indirizzo"> indirizzo</label><br></h1>
+                <br>
+                <in put type="text" id="demo4">
+                    <input type="button" value="send" onclick="stampa4()">
+                    <div>
+                        <p id="dest1"></p>
+                        <p id="dest2"></p>
+                        <p id="dest3"></p>
+                        <p id="dest4"></p>
+                    </div>
+                    <br>
+    </body>
+    </form>
