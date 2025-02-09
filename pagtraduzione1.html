@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prima pagina del sito per criptografare un file</title>
+    <script>
+        
+        function encrypt(text, dictionary) {
+            let encryptedText = "";
+            for (let char of text) {
+                if (dictionary[char]) {
+                    encryptedText += dictionary[char]; 
+                } else {
+                    encryptedText += char; 
+                }
+            }
+            return encryptedText;
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    const dictionary = {
+    'a': '1', 'b': '2', 'c': '3', 'd': '4'
+                };
+                    const encryptedContent = encrypt(content, dictionary);
+                    localStorage.setItem('encryptedText', encryptedContent);
+                    
+                };
+                reader.readAsText(file);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Importa il file e Cripta</h1>
+    <input type="file" accept=".txt" onchange="handleFileUpload(event)" />
+    <a href="pagtraduzione2.html">Clicca qui per visitare la seconda pagina</a>
+
+    
+</body>
+</html>

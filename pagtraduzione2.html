@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stampa MEssaggio E Decrypt</title>
+    <script>
+        function decriptare(encryptedText, key) {
+            let decryptedText = "";
+            const dictionary = { "1": "ciao",
+    '1': 'a', '2': 'b', '3': 'c', '4': 'd',
+            };
+
+            for (let char of encryptedText) {
+                if (dictionary[char]) {
+                    decryptedText += dictionary[char]; 
+                } else {
+                    decryptedText += char; 
+                }
+            }
+            return decryptedText;
+        }
+
+        function stampaMessaggio() {
+            const encryptedText = localStorage.getItem('encryptedText');
+            if (encryptedText) {
+                document.getElementById('encryptedMessage').innerText = encryptedText;
+            } else {
+                document.getElementById('encryptedMessage').innerText = "Nessun messaggio trovato!";
+            }
+        }
+
+        function messaDecriptato() {
+            const encryptedText = document.getElementById('encryptedMessage').innerText;
+            const key = document.getElementById('keyInput').value;
+            const decryptedText = decriptare(encryptedText, key); 
+            document.getElementById('decryptedMessage').innerText = decryptedText;
+        }
+
+        window.onload = function() {
+            stampaMessaggio();
+        }
+    </script>
+</head>
+<body>
+    <h1>Messaggio Criptato</h1>
+    <p id="encryptedMessage"></p>
+
+    <h2>Inserisci la chiave per decriptare</h2>
+    <input type="text" id="keyInput" placeholder="Inserisci la chiave" />
+    <button onclick="messaDecriptato()">Decripta</button>
+
+    <h3>Messaggio Decriptato:</h3>
+    <p id="decryptedMessage"></p>
+</body>
+</html>
