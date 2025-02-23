@@ -3,44 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prima pagina del sito per criptografare un file</title>
+    <title>Prima pagina - Criptare un messaggio</title>
+    <style>
+        body {
+            background-image: url('sfondo.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            color: rgb(3, 1, 1); 
+            font-family: Arial, sans-serif; 
+        }
+    </style>
     <script>
-        
+        let dictionary = {};
+
         function encrypt(text, dictionary) {
             let encryptedText = "";
             for (let char of text) {
                 if (dictionary[char]) {
-                    encryptedText += dictionary[char]; 
+                    encryptedText += dictionary[char] + " "; 
                 } else {
-                    encryptedText += char; 
+                    encryptedText += char + " ";
                 }
             }
-            return encryptedText;
+            return encryptedText.trim();
+        }
+
+        function importDictionary() {
+            const fileInput = document.getElementById('fileInput');
+            const output = document.getElementById('output');
+
+            if (fileInput.files.length === 0) {
+                alert('Seleziona un file prima di importare!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const text = event.target.result;
+                dictionary = {};
+                text.split('\n').forEach(line => {
+                    let [key, value] = line.split(':');
+                    if (key && value) {
+                        dictionary[key.trim()] = value.trim();
+                    }
+                });
+
+                localStorage.setItem('dictionary', JSON.stringify(dictionary));
+                output.textContent = "Dizionario importato e salvato!";
+            };
+            reader.readAsText(file);
         }
 
         function handleFileUpload(event) {
             const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const content = e.target.result;
-                    const dictionary = {
-    'a': '1', 'b': '2', 'c': '3', 'd': '4'
-                };
-                    const encryptedContent = encrypt(content, dictionary);
-                    localStorage.setItem('encryptedText', encryptedContent);
-                    
-                };
-                reader.readAsText(file);
+            if (!file) {
+                alert("Seleziona un file da criptare.");
+                return;
             }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                if (Object.keys(dictionary).length === 0) {
+                    alert("Importa prima il dizionario!");
+                    return;
+                }
+
+                const encryptedContent = encrypt(content, dictionary);
+                localStorage.setItem('encryptedText', encryptedContent);
+                alert("File criptato e salvato!");
+            };
+            reader.readAsText(file);
         }
     </script>
 </head>
 <body>
-    <h1>Importa il file e Cripta</h1>
-    <input type="file" accept=".txt" onchange="handleFileUpload(event)" />
-    <a href="pagtraduzione2.html">Clicca qui per visitare la seconda pagina</a>
+    <h1>Importa il dizionario</h1>
+    <input type="file" id="fileInput" accept=".txt">
+    <button onclick="importDictionary()">Importa Dizionario</button>
+    <pre id="output"></pre>
 
+    <h1>Importa il file e Cripta</h1>
+    <input type="file" id="fileToEncrypt" accept=".txt" onchange="handleFileUpload(event)" />
+    <button onclick="document.getElementById('fileToEncrypt').click();">Seleziona File da Criptare</button>
     
+    <br><br>
+    <a href="pagtraduzione2.html">Vai alla seconda pagina</a>
 </body>
 </html>
+

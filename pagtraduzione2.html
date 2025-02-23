@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stampa MEssaggio E Decrypt</title>
+    <title>Stampa Messaggio e Decrypt</title>
+    <style>
+        body {
+            background-image: url('sfondo.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            color: rgb(3, 1, 1); 
+            font-family: Arial, sans-serif; 
+        }
+    </style>
     <script>
-        function decriptare(encryptedText, key) {
-            let decryptedText = "";
-            const dictionary = { "1": "ciao",
-    '1': 'a', '2': 'b', '3': 'c', '4': 'd',
-            };
+        let dictionary = {};
 
-            for (let char of encryptedText) {
-                if (dictionary[char]) {
-                    decryptedText += dictionary[char]; 
+        function loadDictionary() {
+            const storedDictionary = localStorage.getItem('dictionary');
+            if (storedDictionary) {
+                dictionary = JSON.parse(storedDictionary);
+            } else {
+                alert("Nessun dizionario trovato! Importalo nella prima pagina.");
+            }
+        }
+
+        function decrypt(encryptedText) {
+            let decryptedText = "";
+            const words = encryptedText.split(" ");
+            for (let word of words) {
+                if (word === "") {
+                    decryptedText += " ";
                 } else {
-                    decryptedText += char; 
+                    let decryptedChar = Object.keys(dictionary).find(k => dictionary[k] === word);
+                    decryptedText += decryptedChar ? decryptedChar : word;
                 }
             }
             return decryptedText;
         }
 
-        function stampaMessaggio() {
+        function displayEncryptedMessage() {
             const encryptedText = localStorage.getItem('encryptedText');
             if (encryptedText) {
                 document.getElementById('encryptedMessage').innerText = encryptedText;
@@ -30,15 +48,38 @@
             }
         }
 
-        function messaDecriptato() {
-            const encryptedText = document.getElementById('encryptedMessage').innerText;
-            const key = document.getElementById('keyInput').value;
-            const decryptedText = decriptare(encryptedText, key); 
+        function applyKey() {
+            let key = parseInt(document.getElementById('encryptionKey').value);
+            if (isNaN(key)) {
+                alert("Inserisci un numero valido come chiave!");
+                return;
+            }
+            
+            let encryptedText = localStorage.getItem('encryptedText');
+            let modifiedText = encryptedText.split(" ").map(num => num === "" ? " " : (isNaN(num) ? num : parseInt(num) + key)).join(" ");
+            localStorage.setItem('encryptedTextWithKey', modifiedText + " | Chiave: " + key);
+            document.getElementById('modifiedMessage').innerText = modifiedText;
+            alert("Chiave applicata e messaggio aggiornato!");
+        }
+
+        function decryptMessage() {
+            const encryptedTextWithKey = localStorage.getItem('encryptedTextWithKey');
+            if (!encryptedTextWithKey || !encryptedTextWithKey.includes(" | Chiave: ")) {
+                alert("Nessun messaggio criptato valido trovato.");
+                return;
+            }
+
+            let [encryptedText, key] = encryptedTextWithKey.split(" | Chiave: ");
+            key = parseInt(key.trim());
+
+            let adjustedText = encryptedText.split(" ").map(num => num === "" ? " " : (isNaN(num) ? num : parseInt(num) - key)).join(" ");
+            const decryptedText = decrypt(adjustedText.trim());
             document.getElementById('decryptedMessage').innerText = decryptedText;
         }
 
         window.onload = function() {
-            stampaMessaggio();
+            loadDictionary();
+            displayEncryptedMessage();
         }
     </script>
 </head>
@@ -46,11 +87,19 @@
     <h1>Messaggio Criptato</h1>
     <p id="encryptedMessage"></p>
 
-    <h2>Inserisci la chiave per decriptare</h2>
-    <input type="text" id="keyInput" placeholder="Inserisci la chiave" />
-    <button onclick="messaDecriptato()">Decripta</button>
+    <h2>Aggiungi una chiave numerica</h2>
+    <input type="number" id="encryptionKey">
+    <button onclick="applyKey()">Applica Chiave</button>
+    
+    <h3>Messaggio Modificato:</h3>
+    <p id="modifiedMessage"></p> 
+
+    <h2>Decripta il messaggio</h2>
+    <button onclick="decryptMessage()">Decripta</button>
 
     <h3>Messaggio Decriptato:</h3>
     <p id="decryptedMessage"></p>
 </body>
 </html>
+
+
