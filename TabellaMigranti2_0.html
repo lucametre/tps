@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabella CSV 2.0</title>
+    <title>Tabella Immigrati 2.0</title>
 </head>
     <style>
         body{
@@ -32,7 +32,7 @@
             border: 3px solid rgb(40, 233, 185);
             font-weight: bold;
             font-size: 20px;
-            color:white;
+            color:rgb(0, 0, 0);
         }
         th, td {
             padding: 10px;
@@ -48,13 +48,14 @@
 </head>
 <body>
     <h1>TABELLA MIGRANTIU 2.0</h1>
+    <p>in questa pagina viene visualizzato il grafico in base ai dati inseriti</p><br>
     <p>
     inserisci qui il file:
     </p>
     
     <input type="file" onchange="caricaFile(this)" accept=".csv">
     <table id="tabellaCSV"></table>
-    <p>il grafico rappresenta la curva degli sbarchi dei migranti a partire dal 1997 fino al 2020</p><br>
+
     <p>ASSE X: Anni in ordine crescente</p><br>
     <p>ASSE Y: Numero sbarchi in ordine crescente</p>
     <canvas id="Canvas" width="1500" height="700" ></canvas>
