@@ -1,50 +1,83 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>I Miei Lavori</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La mia Pagina dei Progetti di Tps di quarta</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color:rgb(0, 0, 0);
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
-       h1 {
-            background-color: #333;
-            color:red;
-            padding: 20px 0;
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #6b63ff;
+            color: rgb(248, 248, 248);
+        }
+        .intro {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+        .projects {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .project {
+            background-color: #6b63ff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin: 10px;
+            padding: 20px;
             text-align: center;
         }
-        .lavori {
-            background-color: #070404;
-            color:rgb(98, 0, 255);
-            padding: 20px 0;
-            text-align: center;
+        .project h3 {
+            margin: 0;
+            color: #333;
         }
-        
+        .project button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #6b63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .project button:hover {
+            background-color: #ff0400;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>I Miei Lavori</h1>
-        <p>Benvenuti nella mia pagina dove mostro i miei progetti e lavori.</p>
+        <h1>Benvenuti alla mia Pagina </h1>
     </header>
 
-    <div class="lavori">
-        <div class="lavori">
-            <h2>Lavoro 1: Anagrafica personale</h2>
+    <section class="intro">
+        <p>qua sono presenti tutti i miei lavori nel corso del quarto anno</p>
+    </section>
+
+    <section class="projects">
+        <div class="project">
+            <h3>Lavoro 1: Anagrafica personale</h3>
             <p>Si realizzi una pagina web che possa prendere in input i seguenti valori testuali:
                 Nome
                 Cognome
                 Indirizzo
                 La stampa dei risultati dovrà essere incasellata in una tabella web.
                 E' gradito un layout aggraziato (con css)</p>
-            <a href="es1.html" target="_blank">Guarda il progetto</a>
+            <button onclick="window.location.href='es1.html'">Vai al progetto</button>
         </div>
 
-        <div class="lavori">
-            <h2>Lavoro 2: form con input</h2>
+        <div class="project">
+            <h3>Lavoro 2: form con input</h3>
             <p>Si realizzi un form web contenente i seguenti campi input type="text":
                 Cognome
                 Nome
@@ -53,35 +86,34 @@
                 Città
                 CAP
                 I dati dovranno essere stampati sui tag html attraverso la proprietà innerHTML</p>
-            <a href="formconinput.html" target="_blank">Guarda il progetto</a>
+            <button onclick="window.location.href='formconinput.html'">Vai al progetto</button>
         </div>
 
-        <div class="lavori">
-            <h2>Lavoro 3: Elenco nomi</h2>
+        <div class="project">
+            <h3>Lavoro 3: Elenco nomi</h3>
             <p>Si realizzi uno script che permetta ad un ipotetico utente di inserire i dati anagrafici di una serie di persone.
                 I dati dovranno essere salvati in un vettore e stampati in html</p>
-            <a href="Elenconomi.html" target="_blank">Guarda il progetto</a>
+            <button onclick="window.location.href='Elenconomi.html'">Vai al progetto</button>
         </div>
-        <div class="lavori">
-        <h2>Lavoro 4: stella</h2>
+        <div class="project">
+            <h3>Lavoro 4: stella</h3>
             <p>Realizzare una pagina web contenente un canvas con all'interno la rappresentazione grafica di una stella a cinque punte.</p>
-            <a href="stella.html" target="_blank">Guarda il progetto</a>
+            <button onclick="window.location.href='stella.html'">Vai al progetto</button>
         </div>
-        <div class="lavori">
-    <h2>Lavoro 5: tabella migranti 2.0</h2>
+        <div class="project">
+            <h3>Lavoro 5: tabella migranti 2.0</h3>
             <p>Al lavoro precedente, si aggiunga una funzione che prelevi i dati estratti dal file .csv e crei un grafico "canvas" contenente la curva degli sbarchi a partire dagli anni presenti nel file.
-SI UTILIZZINO SOLO LE FUNZIONI CANVAS (NO Chart.JS)</p>
-            <a href="TabellaMigranti2_0.html" target="_blank">Guarda il progetto</a>
+                SI UTILIZZINO SOLO LE FUNZIONI CANVAS (NO Chart.JS)</p>
+            <button onclick="window.location.href='TabellaMigranti2_0.html'">Vai al progetto</button>
         </div>
-        <div class="lavori">
-    <h2>Lavoro 6: Secret</h2>
+        <div class="project">
+            <h3>Lavoro 6: Secret</h3>
             <p>Si realizzi un software web che importi un file di testo contenente il brano da criptare e il dizionario personalizzato (eventualmente anche di un altra lingua). L'app sarà composta da due pagine: la prima che importi attraverso l'oggetto fileReader il file di partenza. La seconda pagina html, attivabile attraverso un tasto oppure raggiungibile via url, dovrà stampare il brano criptato e permettere, attraverso una "input type=text", la chiave per decriptare il messaggio e stamparlo. Non essendo possibile modificare il file di partenza, si utilizzi il localStorage per "storare" la stringa criptata.
-In allegato l'immagine delle pagine</p>
-            <a href="pagtraduzione1.html" target="_blank">Guarda il progetto</a>
+                In allegato l'immagine delle pagine</p>
+            <button onclick="window.location.href='pagtraduzione1.html'">Vai al progetto</button>
         </div>
+    </section>
 
-    </div>
-
-    
 </body>
 </html>
+
