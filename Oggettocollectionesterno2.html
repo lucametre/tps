@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VISUALIZZA DATI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7463f2;
+        }
+        h1 {
+            margin: 0;
+            color: #050202;
+            font-size: 35px;
+        }
+        </style>
+</head>
+<body>
+    <center><h1>Dati</h1></center>
+	<div>
+		<center>
+		<table id="tabella">
+			<thead>
+				<td><b>Nome</b></td>
+				<td><b>Cognome</b></t>
+				<td><b>Età</b></td>
+
+            </thead>
+			<tbody>
+            </tbody>
+		</table>
+		</center>
+	</div>
+	<br>
+	
+    <script>
+		let datiAccount = JSON.parse(localStorage.getItem("datiAccount"));
+		for (let i = 0; i < datiAccount.length; i++){
+			let table = document.getElementById('tabella').getElementsByTagName('tbody')[0];
+			let newRow = table.insertRow();
+			let cell1 = newRow.insertCell(0);
+			let cell2 = newRow.insertCell(1);
+			let cell3 = newRow.insertCell(2);
+			
+			cell1.textContent = datiAccount[i].Nome;
+			cell2.textContent = datiAccount[i].Cognome;
+			cell3.textContent = datiAccount[i].Eta;
+			
+		}
+    </script>
+</body>
+</html>

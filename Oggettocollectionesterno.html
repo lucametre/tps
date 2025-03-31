@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oggetto collection esterno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7463f2;
+        }
+        h1 {
+            margin: 0;
+            color: #050202;
+            font-size: 35px;
+        }
+        </style>
+    
+</head>
+<body>
+    
+    
+    <br><table width="100%" align="center">
+        
+        <tr>
+            <td>
+                <div class="contenitore" align="center"><br><br>
+                    <b class="carica">CARICA FILE </b><br><br><br><br><br>
+                    <img src="logo.jpg" alt="Seleziona un file" title="seleziona un file" onclick="document.getElementById('inputFile').click();" style="cursor: pointer;" width="200px">
+                    <input type="file" id="inputFile" class="inputFile" onchange="prelevaDati(this)" style="display: none;"><br><br><br><br><br>
+                    
+                </div>
+            </td>
+           
+        </tr>
+    </table>
+    <script>
+        const datiAccount = []
+        function prelevaDati(input){
+            let file = input.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function() {
+                let risultato = reader.result;
+                let contatore = risultato.split("{").length - 1;
+                for (let i = 0; i < contatore; i++){
+                    risultato = risultato.slice(2, risultato.length);
+                    indiceFineOggetto = risultato.indexOf("}");
+                    stringaOggetto = risultato.slice(0,indiceFineOggetto);
+                    risultato = risultato.slice(indiceFineOggetto+1,risultato.length);
+                    let vett = [];
+                    for (let i = 0; i < 3; i++){
+                        inizioAtt = stringaOggetto.indexOf('"');
+                        stringaOggetto = stringaOggetto.slice(inizioAtt+1,stringaOggetto.length);
+                        fineAtt = stringaOggetto.indexOf('"');
+                        attributo = stringaOggetto.slice(0,fineAtt);
+                        vett.push(attributo);
+                        stringaOggetto = stringaOggetto.slice(fineAtt+1,stringaOggetto.length);
+                    }
+                    let nome = vett[0];
+                    let cognome = vett[1];
+                    let eta = vett[2];
+                    
+                    account = {Nome:nome,Cognome:cognome,Eta:eta};
+                    datiAccount.push(account);
+                }
+                localStorage.setItem("datiAccount", JSON.stringify(datiAccount));
+                window.location.href = "Oggettocollectionesterno2.html";
+            }
+        }
+	</script>
+</body>
+</html>
