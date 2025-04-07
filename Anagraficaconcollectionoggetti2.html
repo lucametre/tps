@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizza Dati</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7463f2;
+        }
+        h1 {
+            margin: 0;
+            color: #050202;
+            font-size: 40px;
+        }
+        b {
+            margin: 0;
+            color: #050202;
+            font-size: 20px;
+        }
+        </style>
+</head>
+<body>
+    <center><h1>Dati Inseriti:</h1></center>
+	<div>
+		<b id="nome">NOME: </b><br>
+        <b id="cognome">COGNOME: </b><br>
+        <b id="eta">ETA: </b><br>
+        <b id="indirizzo">INDIRIZZO: </b><br>
+	</div>
+	<br>
+	<script>
+		let dati = JSON.parse(localStorage.getItem("dati"));
+        console.log(dati)
+		for (let i = 0; i < dati.length; i++){
+			
+			let nome = dati[i].Nome;
+			let cognome = dati[i].Cognome;
+			let eta = dati[i].Eta;
+			let indirizzo = dati[i].Indirizzo;
+            document.getElementById("nome").innerHTML = "NOME: " + nome;
+            document.getElementById("cognome").innerHTML = "COGNOME: " + cognome;
+            document.getElementById("eta").innerHTML = "ETA: " + eta;
+            document.getElementById("indirizzo").innerHTML = "INDIRIZZO: " + indirizzo;
+		}
+    </script>
+</body>
+</html>
