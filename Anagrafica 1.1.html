@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Anagrafia 1.1</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-size: 200%;
+            padding-bottom: 15px;
+            font-family: Cambria;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            width: 80%;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #050505;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="l" placeholder="INIZIALE"><button onclick="filtra()">Filtra</button>
+    <h1>Filtro maggiorenni/minorenni</h1><button onclick="maggiorenni()">MAGGIORENNE</button><button onclick="minorenni()">MINORENNI</button><button onclick="mostra(cl)">nessun filtro</button>
+    <h1>Generazione in base all'anno</h1><input type="number" id="gen" placeholder="Inserisci anno"><button onclick="generazione()">Scopri generazione</button>
+    <h2 style="text-align:center;">DATI CLASSE</h2>
+    <table id="Tabella">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Maggiorenne</th>
+                <th>Anno di nascita</th>
+            </tr>
+        </thead>
+        <tbody id="demo"></tbody>
+    </table>
+
+    <script>
+        const requestURL = 'classe.json';
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+        
+        let classe = this.responseText;
+        cl =JSON.parse(classe);
+        mostra(cl);
+         
+        }
+       
+        request.open('GET', requestURL);
+        request.send();
+
+       function mostra(classe) {
+         var testo = "";
+         for (var i = 0; i < classe.length; i++) {
+         testo +=    "<tr><td>" + classe[i].nome +
+            "</td><td>" + classe[i].cognome +
+           "</td><td>" + classe[i].maggiorenne + 
+            "</td><td>" +classe[i].annoNascita + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = testo;
+}
+         
+       function filtra() {
+         var let = document.getElementById("l").value;
+         var filtro = [];
+         if(let!=""){
+            for (var i = 0; i < cl.length; i++) {
+         var l = cl[i].cognome[0];
+         if (l == let) {
+         filtro.push(cl[i]);
+       }
+    }
+    mostra(filtro);
+         }else{
+            mostra(cl)
+         }
+}
+
+       function maggiorenni() {
+         var filtro = [];
+         for (var i = 0; i < cl.length; i++) {
+         if (cl[i].maggiorenne=="true") {
+         filtro.push(cl[i]);
+    }
+  }
+  mostra(filtro);
+}
+function minorenni() {
+         var filtro = [];
+         for (var i = 0; i < cl.length; i++) {
+         if (cl[i].maggiorenne=="false") {
+         filtro.push(cl[i]);
+    }
+  }
+  mostra(filtro);
+}
+function Generazione() {
+  var anno = document.getElementById("gen").value;
+  if (anno == "") return;
+  document.getElementById("gen").innerText = "Appartiene a: " + generazione(anno);
+}
+
+
+        
+    </script> 
+</body>
+</html>

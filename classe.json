@@ -1,0 +1,32 @@
+[
+    {
+        "nome": "Pietro",
+        "cognome": "Adesuwa",
+        "maggiorenne": "true",
+        "annoNascita": "2007"
+    },
+    {
+        "nome": "Sanad",
+        "cognome": "Al muhtaseb",
+        "maggiorenne": "true",
+        "annoNascita": "2007"
+    },
+    {
+        "nome": "Antonio",
+        "cognome": "De rosa",
+        "maggiorenne": "true",
+        "annoNascita": "2007"
+    },
+    {
+        "nome": "Federico",
+        "cognome": "Belbruno",
+        "maggiorenne": "false",
+        "annoNascita": "2007"
+    },
+    {
+        "nome": "Riccardo",
+        "cognome": "Er Pupone",
+        "maggiorenne": "true",
+        "annoNascita": "2007"
+    }
+]
