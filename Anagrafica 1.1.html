@@ -32,8 +32,16 @@
 </head>
 <body>
     <input type="text" id="l" placeholder="INIZIALE"><button onclick="filtra()">Filtra</button>
-    <h1>Filtro maggiorenni/minorenni</h1><button onclick="maggiorenni()">MAGGIORENNE</button><button onclick="minorenni()">MINORENNI</button><button onclick="mostra(cl)">nessun filtro</button>
-    <h1>Generazione in base all'anno</h1><input type="number" id="gen" placeholder="Inserisci anno"><button onclick="generazione()">Scopri generazione</button>
+    <h1>Filtro maggiorenni/minorenni</h1>
+    <button onclick="maggiorenni()">MAGGIORENNE</button>
+    <button onclick="minorenni()">MINORENNI</button>
+    <button onclick="mostra(cl)">nessun filtro</button>
+
+    <h1>Generazione in base all'anno</h1>
+    <input type="number" id="gen" placeholder="Inserisci anno">
+    <button onclick="mostraGenerazione()">Scopri generazione</button>
+    <p id="risGen" style="text-align:center; font-weight:bold;"></p>
+
     <h2 style="text-align:center;">DATI CLASSE</h2>
     <table id="Tabella">
         <thead>
@@ -48,72 +56,85 @@
     </table>
 
     <script>
+      let cl=[];
         const requestURL = 'classe.json';
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
-        
-        let classe = this.responseText;
-        cl =JSON.parse(classe);
-        mostra(cl);
-         
+            if (this.readyState == 4 && this.status == 200) {
+                let classe = this.responseText;
+                cl = JSON.parse(classe);
+                mostra(cl);
+            }
         }
        
         request.open('GET', requestURL);
         request.send();
 
-       function mostra(classe) {
-         var testo = "";
-         for (var i = 0; i < classe.length; i++) {
-         testo +=    "<tr><td>" + classe[i].nome +
-            "</td><td>" + classe[i].cognome +
-           "</td><td>" + classe[i].maggiorenne + 
-            "</td><td>" +classe[i].annoNascita + "</td></tr>";
-  }
-  document.getElementById("demo").innerHTML = testo;
-}
+        function mostra(classe) {
+            var testo = "";
+            for (var i = 0; i < classe.length; i++) {
+                testo += "<tr><td>" + classe[i].nome +
+                    "</td><td>" + classe[i].cognome +
+                    "</td><td>" + classe[i].maggiorenne + 
+                    "</td><td>" + classe[i].annoNascita + "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = testo;
+        }
          
-       function filtra() {
-         var let = document.getElementById("l").value;
-         var filtro = [];
-         if(let!=""){
+        function filtra() {
+            var let = document.getElementById("l").value;
+            var filtro = [];
+            if (let != "") {
+                for (var i = 0; i < cl.length; i++) {
+                    var l = cl[i].cognome[0];
+                    if (l == let) {
+                        filtro.push(cl[i]);
+                    }
+                }
+                mostra(filtro);
+            } else {
+                mostra(cl)
+            }
+        }
+
+        function maggiorenni() {
+            var filtro = [];
             for (var i = 0; i < cl.length; i++) {
-         var l = cl[i].cognome[0];
-         if (l == let) {
-         filtro.push(cl[i]);
-       }
-    }
-    mostra(filtro);
-         }else{
-            mostra(cl)
-         }
-}
+                if (cl[i].maggiorenne == "true") {
+                    filtro.push(cl[i]);
+                }
+            }
+            mostra(filtro);
+        }
 
-       function maggiorenni() {
-         var filtro = [];
-         for (var i = 0; i < cl.length; i++) {
-         if (cl[i].maggiorenne=="true") {
-         filtro.push(cl[i]);
-    }
-  }
-  mostra(filtro);
-}
-function minorenni() {
-         var filtro = [];
-         for (var i = 0; i < cl.length; i++) {
-         if (cl[i].maggiorenne=="false") {
-         filtro.push(cl[i]);
-    }
-  }
-  mostra(filtro);
-}
-function Generazione() {
-  var anno = document.getElementById("gen").value;
-  if (anno == "") return;
-  document.getElementById("gen").innerText = "Appartiene a: " + generazione(anno);
-}
+        function minorenni() {
+            var filtro = [];
+            for (var i = 0; i < cl.length; i++) {
+                if (cl[i].maggiorenne == "false") {
+                    filtro.push(cl[i]);
+                }
+            }
+            mostra(filtro);
+        }
 
+        function mostraGenerazione() {
+            var anno = parseInt(document.getElementById("gen").value);
+            if (isNaN(anno)) return;
+            var risultato = generazione(anno);
+            document.getElementById("risGen").innerText = "Appartiene a: " + risultato;
+        }
 
-        
+        function generazione(anno) {
+            if (anno >= 2013) return "Generazione Alpha";
+            if (anno >= 1997) return "Generazione Z";
+            if (anno >= 1981) return "Millennials";
+            if (anno >= 1965) return "Generazione X";
+            if (anno >= 1946) return "Baby Boomers";
+            if (anno >= 1928) return "Generazione Silenziosa";
+            if (anno >= 1901) return "Greatest Generation";
+            return "Precedente alla Greatest Generation";
+        }
     </script> 
 </body>
 </html>
+
