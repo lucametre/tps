@@ -4,18 +4,69 @@
     <meta charset="UTF-8">
     <title>Anagrafia 1.1</title>
     <style>
+        body {
+            font-family: Cambria, serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        h3 {
+            text-align: center;
+            color: rgba(255, 20, 20, 1);
+            font-size: 180%;
+            margin-bottom: 30px;
+        }
+
         h1 {
             text-align: center;
             color: rgb(0, 0, 0);
-            font-size: 200%;
-            padding-bottom: 15px;
-            font-family: Cambria;
+            font-size: 180%;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: rgba(89, 0, 255, 1);
+            font-size: 150%;
+            margin-top: 40px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input, button {
+            font-size: 16px;
+            padding: 8px 12px;
+            margin: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0078d4;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005fa3;
         }
 
         table {
             border-collapse: collapse;
             margin: 0 auto;
-            width: 80%;
+            width: 90%;
             background-color: white;
         }
 
@@ -28,32 +79,52 @@
         th {
             background-color: #ddd;
         }
+
+        #risGen {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <input type="text" id="l" placeholder="INIZIALE"><button onclick="filtra()">Filtra</button>
-    <h1>Filtro maggiorenni/minorenni</h1>
-    <button onclick="maggiorenni()">MAGGIORENNE</button>
-    <button onclick="minorenni()">MINORENNI</button>
-    <button onclick="mostra(cl)">nessun filtro</button>
+    <div class="container">
+        <h3>ESERCIZIO ANAGRAFICA</h3>
 
-    <h1>Generazione in base all'anno</h1>
-    <input type="number" id="gen" placeholder="Inserisci anno">
-    <button onclick="mostraGenerazione()">Scopri generazione</button>
-    <p id="risGen" style="text-align:center; font-weight:bold;"></p>
+        <div class="section">
+            <h1>Filtro in base all'iniziale</h1>
+            <input type="text" id="l" placeholder="INIZIALE">
+            <button onclick="filtra()">Filtra</button>
+        </div>
 
-    <h2 style="text-align:center;">DATI CLASSE</h2>
-    <table id="Tabella">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>Maggiorenne</th>
-                <th>Anno di nascita</th>
-            </tr>
-        </thead>
-        <tbody id="demo"></tbody>
-    </table>
+        <div class="section">
+            <h1>Filtro maggiorenni/minorenni</h1>
+            <button onclick="maggiorenni()">MAGGIORENNE</button>
+            <button onclick="minorenni()">MINORENNI</button>
+            <button onclick="mostra(cl)">NESSUN FILTRO</button>
+        </div>
+
+        <div class="section">
+            <h1>Generazione in base all'anno</h1>
+            <input type="number" id="gen" placeholder="Inserisci anno">
+            <button onclick="mostraGenerazione()">Scopri generazione</button>
+            <p id="risGen"></p>
+        </div>
+
+        <h2>DATI CLASSE</h2>
+        <table id="Tabella">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Maggiorenne</th>
+                    <th>Anno di nascita</th>
+                </tr>
+            </thead>
+            <tbody id="demo"></tbody>
+        </table>
+    </div>
 
     <script>
       let cl=[];
@@ -137,4 +208,6 @@
     </script> 
 </body>
 </html>
+
+
 
