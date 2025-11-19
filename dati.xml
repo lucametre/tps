@@ -1,0 +1,32 @@
+<persone>
+    <persona>
+        <nome>Pietro</nome>
+        <cognome>Adesuwa</cognome>
+        <maggiorenne>true</maggiorenne>
+        <annoNascita>2007</annoNascita>
+    </persona>
+    <persona>
+        <nome>Sanad</nome>
+        <cognome>Al muhtaseb</cognome>
+        <maggiorenne>true</maggiorenne>
+        <annoNascita>2007</annoNascita>
+    </persona>
+    <persona>
+        <nome>Antonio</nome>
+        <cognome>De rosa</cognome>
+        <maggiorenne>true</maggiorenne>
+        <annoNascita>2007</annoNascita>
+    </persona>
+    <persona>
+        <nome>Federico</nome>
+        <cognome>Belbruno</cognome>
+        <maggiorenne>false</maggiorenne>
+        <annoNascita>2007</annoNascita>
+    </persona>
+    <persona>
+        <nome>Riccardo</nome>
+        <cognome>Er Pupone</cognome>
+        <maggiorenne>true</maggiorenne>
+        <annoNascita>2007</annoNascita>
+    </persona>
+</persone>
